@@ -17,18 +17,6 @@ package utils
 	public class BaseSlide
 	{
 		/**
-		 * This helper adds provided shape to a provided stage, ensuring that the shape is only added once
-		 * @param	sh	The shape that will be added to the stage
-		 * @param	st	The stage that the shape will be added to
-		 */
-		protected function addShapeToStage(sh:Shape, st:Stage):void
-		{
-			if (st.contains(sh)) return;
-			
-			st.addChild(sh);
-		}
-		
-		/**
 		 * The base constructor will establish NanoVG objects
 		 * 
 		 * @param	s	The stage that content will be rendered on
@@ -63,6 +51,9 @@ package utils
 			
 			// Reset the number of renders
 			this._rendersRemaining = this._totalRenders;
+			
+			// This slide has not rendered yet
+			this.hasRendered = false;
 		}
 		
 		/**
@@ -72,6 +63,11 @@ package utils
 		{
 			if (--this._rendersRemaining < 0) this._rendersRemaining = 0;
 		}
+		
+		/**
+		 * If this slide has rendered yet
+		 */
+		protected var hasRendered = false;
 		
 		/**
 		 * The fonts that have so far been loaded into the system. This is used to prevent loading multiple of the same font
@@ -106,13 +102,21 @@ package utils
 		 */
 		public function render():Boolean
 		{
-			var areRendersRemaining:Boolean = this._rendersRemaining > 0;
+			if (this._rendersRemaining == 0) return false;
+			
+			// Add the shape to the stage if the shape is not already in the stage
+			if (this.stage.contains(this.shape) == false);
+			{
+				this.stage.addChild(this.shape);
+			}
 			
 			this.renderAction();
 			
+			this.hasRendered = true;
+			
 			this.decrementRendersRemaining();
 			
-			return areRendersRemaining;
+			return true;
 		}
 		
 		/**
@@ -156,6 +160,25 @@ package utils
 		 * The `stage` that content will be rendered on to
 		 */
 		protected var stage:Stage;
+		
+		/**
+		 * The title of the page
+		 */
+		protected var _title:String;
+		
+		/**
+		 * The large title that will be displayed
+		 */
+		public function get title():String
+		{
+			return this._title;
+		}
+		
+		/**
+		 * A number between 0 and 1 that represents the height of the title as a function of percentage of native stage height. For example, a
+		 * value of `0.5` will make the title as tall as half the native height of the stage
+		 */
+		protected var _titleHeight:Number = 14;
 		
 		/**
 		 * The total number of renders actions that the slide can make

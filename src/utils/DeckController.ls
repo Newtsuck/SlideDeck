@@ -55,6 +55,12 @@ package utils
 				DeckController._slideNumber--;
 				DeckController.slides[DeckController._slideNumber].render();
 			}
+			else if (DeckController._slideNumber == 0)
+			{ 
+				// If the slide number is 0 then just re-render the current slide
+				DeckController.slides[DeckController._slideNumber].clean();
+				DeckController.slides[DeckController._slideNumber].render();
+			}
 		}
 		
 		/**

@@ -19,11 +19,11 @@ package slides
 			// Change the title of the slide
 			this._title = "Example Title 1";
 			
+			// Change the size of the title as a function of the total height of the stage
+			this._titleHeight = 0.22; // 0.14 is the default
+			
 			// Change the subtitle of the slide
 			this._subTitle = "Example subtitle";
-			
-			// Change the size of the title as a function of the total height of the stage
-			this._titleHeight = 0.25; // 0.25 is the default
 			
 			// Chang ethe size of the sub title as a function of the total height of the stage
 			this._subTitleHeight = 0.10; // 0.10 is the default

@@ -37,8 +37,6 @@ package utils
 			
 			// Draw the subTitle so that is directly underneath the title
 			this.shape.graphics.drawTextBox(0, this.stage.nativeStageHeight * 0.55, this.stage.nativeStageWidth, this._subTitle);
-			
-			this.addShapeToStage(this.shape, this.stage);
 		}
 		
 		/**
@@ -51,17 +49,6 @@ package utils
 		 * value of `0.25` will make the subtitle as tall as one quarter the height of the stage
 		 */
 		protected var _subTitleHeight:Number = 0.1;
-		
-		/**
-		 * The large title that will be displayed
-		 */
-		protected var _title:String = "Default Title";
-		
-		/**
-		 * A number between 0 and 1 that represents the height of the title as a function of percentage of native stage height. For example, a
-		 * value of `0.5` will make the title as tall as half the native height of the stage
-		 */
-		protected var _titleHeight:Number = 0.25;
 		
 		/**
 		 * The constructor simply takes the stage that content will be rendered on

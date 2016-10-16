@@ -20,7 +20,8 @@ package
 			
 			// Add all of our slides to the deck
 			DeckController.addSlide(new ExampleTitleSlide(this.stage));
-			DeckController.addSlide(new ExampleTitle2Slide(this.stage));
+			DeckController.addSlide(new ExampleListSlide(this.stage));
+
 			
 			// Do the initial render!
 			DeckController.renderNext();
