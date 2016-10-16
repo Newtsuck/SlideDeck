@@ -13,11 +13,11 @@ package utils
 	 */
 	public class TitleSlide extends BaseSlide
 	{				
-		/** @inheritDoc **/
-		override public function render():Boolean
+		/**
+		 * The render action for a title slide will render a large title, and a smaller subtitle
+		 */
+		override protected function renderAction():void
 		{
-			this.decrementRendersRemaining();
-			
 			// Apply the text format for the title
 			var format:TextFormat = new TextFormat();
 			format.color = 0x000000;
@@ -36,12 +36,9 @@ package utils
 			this.shape.graphics.textFormat(format);
 			
 			// Draw the subTitle so that is directly underneath the title
-			this.shape.graphics.drawTextBox(0, this.stage.nativeStageHeight / 2, this.stage.nativeStageWidth, this._subTitle);
+			this.shape.graphics.drawTextBox(0, this.stage.nativeStageHeight * 0.55, this.stage.nativeStageWidth, this._subTitle);
 			
 			this.addShapeToStage(this.shape, this.stage);
-			
-			if (this._rendersRemaining == 0) return false;
-			return true;
 		}
 		
 		/**

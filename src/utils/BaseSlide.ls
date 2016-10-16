@@ -1,5 +1,6 @@
 package utils 
 {
+	import feathers.controls.NumericStepper;
 	import loom2d.display.DisplayObject;
 	import loom2d.display.Graphics;
 	import loom2d.display.Shape;
@@ -59,6 +60,9 @@ package utils
 			{
 				this.stage.removeChild(this.shape);
 			}
+			
+			// Reset the number of renders
+			this._rendersRemaining = this._totalRenders;
 		}
 		
 		/**
@@ -95,19 +99,29 @@ package utils
 		 * an image rendering slide will only render the first image when `render` is called the first time, and will render
 		 * more images as render continues to be called. Once all slide aspects are rendered the `render` function will do nothing.
 		 * 
-		 * The boolean that is returned represents if there is more content that can be rendered. If there IS content to render
+		 * The boolean that is returned represents if content was rendered in the call. If there WAS content to render
 		 * then a value of `true` will be returned, otherwise a value of `false` will be returned.
 		 * 
-		 * This function MUST be overriden in subclasses
-		 * 
-		 * @return	Will return whether or not there is more content available to render
+		 * @return	Will return whether or not content was rendered
 		 */
 		public function render():Boolean
 		{
-			// This function MUST be overriden in subclasses
-			Debug.assertException(new Error("Attempting to call Base version of `render` from `BaseSlide`. This function MUST be overridden in subclasses"));
+			var areRendersRemaining:Boolean = this._rendersRemaining > 0;
 			
-			return false;
+			this.renderAction();
+			
+			this.decrementRendersRemaining();
+			
+			return areRendersRemaining;
+		}
+		
+		/**
+		 * The render action does the bulk of rendering actions and will differ for each subclass type. This function MUST be overridden in subclasses
+		 */
+		protected function renderAction():void
+		{
+			// This function MUST be overridden in subclasses
+			Debug.assertException(new Error("Attempting to call Base version of `render` from `BaseSlide`. This function MUST be overridden in subclasses"));
 		}
 		
 		/**
@@ -122,6 +136,18 @@ package utils
 		public function get rendersRemaining():Number { return this._rendersRemaining; }
 		
 		/**
+		 * Sets the total number of renders that can be made by the slide. This function should ONLY be used in the constructor
+		 * of subclasses, and MUST be used if there is more than 1 render action for the slide
+		 * 
+		 * @param	renders
+		 */
+		protected function setTotalRenders(renders:Number):void
+		{
+			this._totalRenders = renders;
+			this._rendersRemaining = renders;
+		}
+		
+		/**
 		 * The `shape` used for rendering NanoVG content
 		 */
 		protected var shape:Shape;
@@ -130,5 +156,15 @@ package utils
 		 * The `stage` that content will be rendered on to
 		 */
 		protected var stage:Stage;
+		
+		/**
+		 * The total number of renders actions that the slide can make
+		 */
+		protected var _totalRenders:Number = 1;
+		
+		/**
+		 * The total number of things that this slide can render
+		 */
+		public function get totalRenders():Number { return this._totalRenders; }
 	}
 }
