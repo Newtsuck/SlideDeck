@@ -6,6 +6,7 @@ This is a slide deck application written in Loom by Level 4 Development for The 
 ## Version Updates
 #### 0.2.1
 - Added support for multi line titles on title slides
+- Added support for custom title slide "part line"
 
 #### 0.2.0
 - Support for transitioning between slides
