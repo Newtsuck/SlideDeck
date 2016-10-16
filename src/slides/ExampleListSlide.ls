@@ -33,6 +33,9 @@ package slides
 			
 			// Change whether or not the list items should render instantly
 			this.renderInstantly = false; // false is the default
+			
+			// Change the buffer that seperates seperate items from each other and the boundries of the stage
+			this.itemBuffer = 0.01; // 0.01 is the default
 		}
 	}
 }

@@ -70,6 +70,11 @@ package utils
 		protected var hasRendered = false;
 		
 		/**
+		 * A buffer between renderable items, as a function of screen height
+		 */
+		protected var itemBuffer = 0.01;
+		
+		/**
 		 * The fonts that have so far been loaded into the system. This is used to prevent loading multiple of the same font
 		 */
 		protected static var loadedFonts:Vector.<String> = new Vector.<String>();

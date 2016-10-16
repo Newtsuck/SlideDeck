@@ -18,11 +18,6 @@ package utils
 		}
 		
 		/**
-		 * A buffer between renderable items, as a function of screen height
-		 */
-		protected var itemBuffer = 0.01;
-		
-		/**
 		 * The items that will be listed, in the order that they will be rendered
 		 */
 		protected var _listItems:Vector.<String> = new Vector.<String>();

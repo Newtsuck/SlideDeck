@@ -22,11 +22,19 @@ package utils
 			var format:TextFormat = new TextFormat();
 			format.color = 0x000000;
 			format.size = this.stage.nativeStageHeight * this._titleHeight;
-			format.align = TextAlign.CENTER | TextAlign.BASELINE;
+			format.align = TextAlign.CENTER | TextAlign.TOP;
 			this.shape.graphics.textFormat(format);
 			
 			// Draw the title so that it is resting on top of the horizontal center of the stage
-			this.shape.graphics.drawTextLine(this.stage.nativeStageWidth / 2, this.stage.nativeStageHeight / 2, this._title);
+			// First determine the part line, and the buffer values
+			var pixelPartLineY = this.stage.nativeStageHeight * this._partLineY;
+			var pixelItembufferVertical = this.stage.nativeStageHeight * this.itemBuffer;
+			
+			// Determine where the y value of the title needs to be and draw it!
+			var titleWidth = this.stage.nativeStageWidth;
+			var titleHeight = this.stage.nativeStageHeight;
+			var titleYModifier = this.shape.graphics.textBoxBounds(format, 0, 0, titleWidth, this._title).height;
+			this.shape.graphics.drawTextBox(0, pixelPartLineY - pixelItembufferVertical - titleYModifier, titleWidth, this._title);
 			
 			// Apply the text format for the subTitle
 			format = new TextFormat();
@@ -36,8 +44,13 @@ package utils
 			this.shape.graphics.textFormat(format);
 			
 			// Draw the subTitle so that is directly underneath the title
-			this.shape.graphics.drawTextBox(0, this.stage.nativeStageHeight * 0.55, this.stage.nativeStageWidth, this._subTitle);
+			this.shape.graphics.drawTextBox(0, pixelPartLineY + pixelItembufferVertical / 2, this.stage.nativeStageWidth, this._subTitle);
 		}
+		
+		/**
+		 * The Y value of the horizontal line that seperates the title and the subtitle, the items will still be seperated by the item buffer
+		 */
+		protected var _partLineY:Number = 0.5;
 		
 		/**
 		 * The smaller subtitle that will be displayed

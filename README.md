@@ -4,6 +4,9 @@ Loom Slide Deck!
 This is a slide deck application written in Loom by Level 4 Development for The Engine Company.
 
 ## Version Updates
+#### 0.2.1
+- Added support for multi line titles on title slides
+
 #### 0.2.0
 - Support for transitioning between slides
 - Improved support for title slides

@@ -17,7 +17,7 @@ package slides
 			super(s);
 			
 			// Change the title of the slide
-			this._title = "Example Title 1";
+			this._title = "Example Title 1 That Wraps!";
 			
 			// Change the size of the title as a function of the total height of the stage
 			this._titleHeight = 0.22; // 0.14 is the default
@@ -25,8 +25,14 @@ package slides
 			// Change the subtitle of the slide
 			this._subTitle = "Example subtitle";
 			
-			// Chang ethe size of the sub title as a function of the total height of the stage
+			// Change the size of the subtitle as a function of the total height of the stage
 			this._subTitleHeight = 0.10; // 0.10 is the default
+			
+			// Change the Y position of the "part line" (the horizontal line that seperates the title and subtitle) as a function of the total height of the stage
+			this._partLineY = 0.6; // 0.5 is the default
+			
+			// The the buffer between the title and the subtitle as a function of the total height of the stage
+			this.itemBuffer = 0.05; // 0.01 is the default
 		}
 	}
 }
