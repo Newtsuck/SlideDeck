@@ -31,8 +31,11 @@ package slides
 			// Change the Y position of the "part line" (the horizontal line that seperates the title and subtitle) as a function of the total height of the stage
 			this._partLineY = 0.6; // 0.5 is the default
 			
-			// The the buffer between the title and the subtitle as a function of the total height of the stage
+			// Change the the buffer between the title and the subtitle as a function of the total height of the stage
 			this.itemBuffer = 0.05; // 0.01 is the default
+			
+			// The address of the background image for this slide, if no address is provided background will be white
+			this.background = "assets/bg.png";
 		}
 	}
 }

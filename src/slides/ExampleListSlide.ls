@@ -36,6 +36,9 @@ package slides
 			
 			// Change the buffer that seperates seperate items from each other and the boundries of the stage
 			this.itemBuffer = 0.01; // 0.01 is the default
+			
+			// The address of the background image for this slide, if no address is provided background will be white
+			this.background = "assets/bg.png";
 		}
 	}
 }

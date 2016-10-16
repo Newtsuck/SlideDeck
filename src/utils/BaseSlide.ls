@@ -6,6 +6,8 @@ package utils
 	import loom2d.display.Shape;
 	import loom2d.display.Stage;
 	import loom2d.display.TextFormat;
+	import loom2d.display.Image;
+    import loom2d.textures.Texture;
 	import system.errors.Error;
 	
 	/**
@@ -16,6 +18,18 @@ package utils
 	 */
 	public class BaseSlide
 	{
+		/**
+		 * The file location of the background to apply to this slide
+		 * 
+		 * NOTE: Vector graphics for the background are not (yet) supported!
+		 */
+		protected var background:String;
+		
+		/**
+		 * The actual background image
+		 */
+		private var backgroundImage:Image;
+		
 		/**
 		 * The base constructor will establish NanoVG objects
 		 * 
@@ -47,6 +61,12 @@ package utils
 			if (this.stage.contains(this.shape))
 			{
 				this.stage.removeChild(this.shape);
+			}
+			
+			// Remove the background from the stage, if it exists
+			if (this.backgroundImage != null && this.stage.contains(this.backgroundImage) == true)
+			{
+				this.stage.removeChild(this.backgroundImage);
 			}
 			
 			// Reset the number of renders
@@ -108,6 +128,15 @@ package utils
 		public function render():Boolean
 		{
 			if (this._rendersRemaining == 0) return false;
+			
+			// Render the background if there is a background to try and render (and it hasn't already been rendered
+			if (this.background != null && this.background != "" && this.stage.contains(backgroundImage) == false)
+			{
+				backgroundImage = new Image(Texture.fromAsset(this.background));
+				backgroundImage.width = stage.stageWidth;
+				backgroundImage.height = stage.stageHeight;
+				stage.addChild(backgroundImage);
+			}
 			
 			// Add the shape to the stage if the shape is not already in the stage
 			if (this.stage.contains(this.shape) == false);
