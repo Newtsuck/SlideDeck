@@ -4,6 +4,9 @@ Loom Slide Deck!
 This is a slide deck application written in Loom by Level 4 Development for The Engine Company.
 
 ## Version Updates
+#### 1.0.0
+- API Lock! The existing customization fields will not change for this major version! Note that some fields may be added, but currently available fields will not be changed
+
 #### 0.3.0
 - Added support for image slides
 
