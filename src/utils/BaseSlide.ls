@@ -48,6 +48,13 @@ package utils
 		}
 		
 		/**
+		 * Whether or not this slide should instantly render the items on the list, or if it should render them one by one
+		 * 
+		 * NOTE: This does nothing for the Title slide type
+		 */
+		protected var renderInstantly:Boolean = false;
+		
+		/**
 		 * Will clean up the content that is rendered on the stage provided in the `render` function
 		 * 
 		 * This function should always be called when the slide is finished
@@ -69,11 +76,22 @@ package utils
 				this.stage.removeChild(this.backgroundImage);
 			}
 			
+			// Do custom cleaning
+			this.customClean();
+			
 			// Reset the number of renders
 			this._rendersRemaining = this._totalRenders;
 			
 			// This slide has not rendered yet
 			this.hasRendered = false;
+		}
+		
+		/**
+		 * Some slide types require custom clearning procedures. This function allows a subclass to do extra cleaning steps if overritten.
+		 */
+		protected function customClean():void
+		{
+			// Functionality is only in subclasses
 		}
 		
 		/**

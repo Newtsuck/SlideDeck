@@ -3,7 +3,7 @@ package utils
 	import feathers.text.TextFormatAlign;
 	import loom2d.display.Stage;
 	import loom2d.display.TextAlign;
-	import loom2d.display.TextFormat;	
+	import loom2d.display.TextFormat;
 	/**
 	 * This slide type renders a title and a list of objects that can be rendered either
 	 * one at a time or all at once
@@ -72,7 +72,7 @@ package utils
 				format.align = TextAlign.CENTER | TextAlign.TOP;
 				this.shape.graphics.textFormat(format);
 				
-				// Draw the title so that it is resting on top of the horizontal center of the stage
+				// Draw the title so that it is at the top of the stage
 				var titleY = this.itemBuffer;
 				this.shape.graphics.drawTextLine(this.stage.nativeStageWidth / 2, titleY, this._title);
 				
@@ -102,11 +102,6 @@ package utils
 			}
 			
 		}
-		
-		/**
-		 * Whether or not this slide should instantly render the items on the list, or if it should render them one by one
-		 */
-		protected var renderInstantly:Boolean = false;
 		
 		/**
 		 * Renders the next list item underneath the previous list item, or directly below the title

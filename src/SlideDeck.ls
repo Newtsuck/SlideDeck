@@ -19,6 +19,7 @@ package
             this.stage.color = 0xFFFFFF;
 			
 			// Add all of our slides to the deck
+			DeckController.addSlide(new ExampleImageSlide(this.stage));
 			DeckController.addSlide(new ExampleTitleSlide(this.stage));
 			DeckController.addSlide(new ExampleListSlide(this.stage));
 

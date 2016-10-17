@@ -20,6 +20,7 @@ package slides
 			this._title = "Example List Slide";
 			
 			// Change the size of the title as a function of the total height of the stage
+			// TIP: If there is no title for this slide, set this value to 0
 			this._titleHeight = 0.14; // 0.14 is the default
 			
 			// Add the list items one at a time, in the order that they will appear
