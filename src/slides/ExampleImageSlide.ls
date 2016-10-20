@@ -7,7 +7,8 @@ package slides
     import loom2d.textures.Texture;
 	
 	/**
-	 * ...
+	 * This is an example image slide that goes through some of the functionality of the image slide
+	 * 
 	 * @author Joshua Evans
 	 */
 	public class ExampleImageSlide extends ImageSlide
@@ -26,17 +27,17 @@ package slides
 			this._titleHeight = 0.14; // 0.14 is the default
 			
 			// Add images to the slide one at a time, in the order they will be appear
-			this.images.push(new Image(Texture.fromAsset("assets/logo.png")));
-			this.images.push(new Image(Texture.fromAsset("assets/logo.png")));
-			this.images.push(new Image(Texture.fromAsset("assets/logo.png")));
-			this.images.push(new Image(Texture.fromAsset("assets/logo.png")));
-			this.images.push(new Image(Texture.fromAsset("assets/logo.png")));
+			this._images.push(new Image(Texture.fromAsset("assets/logo.png")));
+			this._images.push(new Image(Texture.fromAsset("assets/logo.png")));
+			this._images.push(new Image(Texture.fromAsset("assets/logo.png")));
+			this._images.push(new Image(Texture.fromAsset("assets/logo.png")));
+			this._images.push(new Image(Texture.fromAsset("assets/logo.png")));
 			
 			// Change whether or not the images should render instantly
-			this.renderInstantly = false; // false is the default
+			this._renderInstantly = true; // false is the default
 			
 			// The address of the background image for this slide, if no address is provided background will be white
-			this.background = "assets/bg.png";
+			this._backgroundLocation = "assets/bg.png";
 		}
 	}
 }

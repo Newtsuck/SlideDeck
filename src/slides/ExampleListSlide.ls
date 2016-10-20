@@ -33,13 +33,13 @@ package slides
 			this._listItemHeight = 0.08; // 0.08 is the default
 			
 			// Change whether or not the list items should render instantly
-			this.renderInstantly = false; // false is the default
+			this._renderInstantly = false; // false is the default
 			
 			// Change the buffer that seperates seperate items from each other and the boundries of the stage
-			this.itemBuffer = 0.01; // 0.01 is the default
+			this._itemBuffer = 0.01; // 0.01 is the default
 			
 			// The address of the background image for this slide, if no address is provided background will be white
-			this.background = "assets/bg.png";
+			this._backgroundLocation = "assets/bg.png";
 		}
 	}
 }

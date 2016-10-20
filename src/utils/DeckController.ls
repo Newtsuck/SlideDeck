@@ -8,6 +8,29 @@ package utils
 	 */
 	public static class DeckController 
 	{
+		//********** CONSTRUCTOR **********//
+		// No constructor, this is a static class!
+		
+		//********** CONSTANTS, VARIABLES, AND ACCESSORS **********//
+		/**
+		 * The slides that will be rendered, in the ordered that they will be rendered
+		 */
+		private static var _slides:Vector.<BaseSlide> = new Vector.<BaseSlide>();
+		
+		/**
+		 * The index of the slide that is currently being rendered
+		 */
+		private static var _slideNumber:Number = 0;
+		
+		/**
+		 * The number of the slide that is currently being rendered
+		 */
+		public static function get slideNumber():Number
+		{
+			return DeckController._slideNumber;
+		}
+		
+		//********** PUBLIC FUNCTIONS **********//
 		/**
 		 * Adds a slide to the slide deck
 		 * 
@@ -15,7 +38,7 @@ package utils
 		 */
 		public static function addSlide(slide:BaseSlide):void
 		{
-			DeckController.slides.push(slide);
+			DeckController._slides.push(slide);
 		}
 		
 		/**
@@ -23,7 +46,7 @@ package utils
 		 */
 		public static function get numberOfSLides():Number
 		{
-			return DeckController.slides.length;
+			return DeckController._slides.length;
 		}
 		
 		/**
@@ -32,12 +55,12 @@ package utils
 		public static function renderNext():void
 		{
 			// First attempt to render the current slide
-			if (DeckController.slides[DeckController._slideNumber].render() == false && DeckController.slides.length - 1 > DeckController._slideNumber)
+			if (DeckController._slides[DeckController._slideNumber].render() == false && DeckController._slides.length - 1 > DeckController._slideNumber)
 			{
 				// If the render function returns false, render the next slide (if there is another slide to render)
-				DeckController.slides[DeckController._slideNumber].clean();
+				DeckController._slides[DeckController._slideNumber].clean();
 				DeckController._slideNumber++;
-				DeckController.slides[DeckController._slideNumber].render();
+				DeckController._slides[DeckController._slideNumber].render();
 			}
 		}
 		
@@ -51,34 +74,22 @@ package utils
 			// Make sure there is a slide to render before we continue
 			if (DeckController._slideNumber > 0)
 			{
-				DeckController.slides[DeckController._slideNumber].clean();
+				DeckController._slides[DeckController._slideNumber].clean();
 				DeckController._slideNumber--;
-				DeckController.slides[DeckController._slideNumber].render();
+				DeckController._slides[DeckController._slideNumber].render();
 			}
 			else if (DeckController._slideNumber == 0)
 			{ 
 				// If the slide number is 0 then just re-render the current slide
-				DeckController.slides[DeckController._slideNumber].clean();
-				DeckController.slides[DeckController._slideNumber].render();
+				DeckController._slides[DeckController._slideNumber].clean();
+				DeckController._slides[DeckController._slideNumber].render();
 			}
 		}
 		
-		/**
-		 * The slides that will be rendered, in the ordered that they will be rendered
-		 */
-		private static var slides:Vector.<BaseSlide> = new Vector.<BaseSlide>();
+		//********** PROTECTED FUNCTIONS **********//
+		// No protected functions
 		
-		/**
-		 * The index of the slide that is currently being rendered
-		 */
-		private static var _slideNumber:Number = 0;
-		
-		/**
-		 * The number of the slide that is currently being rendered
-		 */
-		private static function get slideNumber():Number
-		{
-			return DeckController._slideNumber;
-		}
+		//********** PRIVATE FUNCTIONS **********//
+		// No private functions
 	}
 }

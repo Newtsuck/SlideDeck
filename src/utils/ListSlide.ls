@@ -12,11 +12,18 @@ package utils
 	 */
 	public class ListSlide extends BaseSlide
 	{
-		private function getPixelListItemHeight():Number
+		//********** CONSTRUCTOR **********//
+		/**
+		 * The constructor simply takes the stage that content will be rendered on
+		 * 
+		 * @param	s	The stage content will be rendered on
+		 */
+		public function ListSlide(s:Stage) 
 		{
-			return this.stage.nativeStageHeight * this._listItemHeight;
+			super(s);
 		}
 		
+		//********** CONSTANTS, VARIABLES, AND ACCESSORS **********//
 		/**
 		 * The items that will be listed, in the order that they will be rendered
 		 */
@@ -36,16 +43,7 @@ package utils
 		protected var _listItemHeight = 0.08;
 		
 		// The number of list items that have been rendered in this render cycle
-		private var listItemsRendered:Number = 0;
-		
-		/**
-		 * The constructor simply takes the stage that content will be rendered on
-		 * @param	s	The stage content will be rendered on
-		 */
-		public function ListSlide(s:Stage) 
-		{
-			super(s);
-		}
+		private var _listItemsRendered:Number = 0;
 		
 		/**
 		 * The anchor point's y position, in this case the bottom left corner, of the previously rendered list item
@@ -54,33 +52,45 @@ package utils
 		 */
 		private var previousListItemAnchor:Number = 0;
 		
+		//********** PUBLIC FUNCTIONS **********//
+		/**
+		 * Gets the pixel value of the height of each list item from the percentage value proviedd by the `_listItemHeight` variable
+		 * 
+		 * @return The pixel value of the height of each list item
+		 */
+		private function getPixelListItemHeight():Number
+		{
+			return this._stage.nativeStageHeight * this._listItemHeight;
+		}
+		
+		//********** PROTECTED FUNCTIONS **********//
 		/**
 		 * This render action will render a title, and then render each list item
 		 */
 		override protected function renderAction():void
 		{
-			if (this.hasRendered == false)
+			if (this._hasRendered == false)
 			{
 				// Make sure the number of list items that have been rendered is marked as 0
-				this.listItemsRendered = 0;
+				this._listItemsRendered = 0;
 				
 				// Instantly render the title the first time a render action is made
 				// Apply the text format for the title
 				var format:TextFormat = new TextFormat();
 				format.color = 0x000000;
-				format.size = this.stage.nativeStageHeight * this._titleHeight;
+				format.size = this._stage.nativeStageHeight * this._titleHeight;
 				format.align = TextAlign.CENTER | TextAlign.TOP;
-				this.shape.graphics.textFormat(format);
+				this._shape.graphics.textFormat(format);
 				
 				// Draw the title so that it is at the top of the stage
-				var titleY = this.itemBuffer;
-				this.shape.graphics.drawTextLine(this.stage.nativeStageWidth / 2, titleY, this._title);
+				var titleY = this._itemBuffer;
+				this._shape.graphics.drawTextLine(this._stage.nativeStageWidth / 2, titleY, this._title);
 				
 				// Get the title's anchor point, the title's Y position plus it's size, plus a small buffer
-				this.previousListItemAnchor = titleY + format.size + this.itemBuffer;
+				this.previousListItemAnchor = titleY + format.size + this._itemBuffer;
 				
 				// This slide hasn't rendered anything, to calculate the number of renders we will need to do
-				if (this.renderInstantly)
+				if (this._renderInstantly)
 				{
 					this.setTotalRenders(1);
 					
@@ -103,6 +113,7 @@ package utils
 			
 		}
 		
+		//********** PRIVATE FUNCTIONS **********//
 		/**
 		 * Renders the next list item underneath the previous list item, or directly below the title
 		 * 
@@ -110,34 +121,34 @@ package utils
 		 */
 		private function renderNextListItem():Boolean
 		{
-			if (this.listItemsRendered == this._listItems.length) return false;
+			if (this._listItemsRendered == this._listItems.length) return false;
 			
 			// Define the X value of the item
-			var itemX = this.itemBuffer;
+			var itemX = this._itemBuffer;
 			
 			// Create a circle bullet point
-			this.shape.graphics.lineStyle(0.1);
-			this.shape.graphics.beginFill(0x000000, 1);
-			this.shape.graphics.drawCircle(itemX + this.getPixelListItemHeight() / 2, this.previousListItemAnchor + this.getPixelListItemHeight() / 2, this.getPixelListItemHeight() * 0.25);
-			this.shape.graphics.endFill(); 
+			this._shape.graphics.lineStyle(0.1);
+			this._shape.graphics.beginFill(0x000000, 1);
+			this._shape.graphics.drawCircle(itemX + this.getPixelListItemHeight() / 2, this.previousListItemAnchor + this.getPixelListItemHeight() / 2, this.getPixelListItemHeight() * 0.25);
+			this._shape.graphics.endFill(); 
 			
 			// Apply the text format for the list item
 			var format = new TextFormat();
 			format.color = 0x000000;
 			format.size = this.getPixelListItemHeight();
 			format.align = TextAlign.LEFT | TextAlign.TOP;
-			this.shape.graphics.textFormat(format);
+			this._shape.graphics.textFormat(format);
 			
 			// Recalculate the item's x value to place the words to the right of the bullet point, and calculate the item's width
-			itemX += this.getPixelListItemHeight() + this.itemBuffer;
-			var itemWidth = this.stage.nativeStageWidth - itemX;
+			itemX += this.getPixelListItemHeight() + this._itemBuffer;
+			var itemWidth = this._stage.nativeStageWidth - itemX;
 			
 			// Draw the subTitle so that is directly underneath the previous anchor point
-			this.shape.graphics.drawTextBox(itemX, this.previousListItemAnchor, itemWidth, this.listItems[this.listItemsRendered]);
+			this._shape.graphics.drawTextBox(itemX, this.previousListItemAnchor, itemWidth, this.listItems[this._listItemsRendered]);
 			
 			// Determine the next anchor point
-			this.previousListItemAnchor += this.shape.graphics.textBoxBounds(format, itemX, this.previousListItemAnchor, itemWidth, this.listItems[this.listItemsRendered]).height + this.itemBuffer;
-			listItemsRendered++;
+			this.previousListItemAnchor += this._shape.graphics.textBoxBounds(format, itemX, this.previousListItemAnchor, itemWidth, this.listItems[this._listItemsRendered]).height + this._itemBuffer;
+			_listItemsRendered++;
 			
 			return true;
 		}
