@@ -1,7 +1,10 @@
 Loom Slide Deck!
 ================
 
-This is a slide deck application written in Loom by Level 4 Development for The Engine Company.
+This is a slide deck application written in Loom
+
+Code originally created by Ben Garney of the Engine Company
+Refactoring and Refinement by Joshua Evans of Level 4 Development
 
 ## How to create slides
 To create slides, first instantiate ImageElements and TextElements and add them to a Slide instance. Once the slide is created it can be added
@@ -44,7 +47,8 @@ Check out the in line documentation in each file (espeically the examples in the
 #### 0.1.0
 - Basic support for title slides and rendering. This version primarily exists as a basic rendering test to verify functionality on required platforms and is far from feature complete
 
-
+## What is Loom?
+http://loomsdk.com/
 
 ## Who is Level 4 Development?
 Joshua Evans - Engineering - TheJoshuaEvans@gmail.com
